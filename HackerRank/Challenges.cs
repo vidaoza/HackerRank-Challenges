@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HackerRank
 {
     static class Challenges
     {
-        public static int[] ArraysLeftRotation(
+        internal static int[] ArraysLeftRotation(
             int[] array,
             int noOfRotations)
         {
+            if (noOfRotations > array.Length)
+                throw new Exception("No of rotations are more than no of elements in the array.");
+
             Stack<int> results = new Stack<int>();
 
             int count = 0;
@@ -31,6 +35,29 @@ namespace HackerRank
 
             return results.ToArray();
 
+        }
+
+        internal static int MakeAnagrams(
+            string firstString,
+            string secondString)
+        {
+            var secondStringLookup = secondString.ToLookup(i => i);
+
+            var list = from firstStringGroup in firstString.GroupBy(s => s)
+                       let secondStringGroup = secondStringLookup[firstStringGroup.Key]
+                       from i in (firstStringGroup.Count() < secondStringGroup.Count() ? firstStringGroup : secondStringGroup)
+                       select i;
+
+            return (firstString.Length - list.Count()) + (secondString.Length - list.Count());
+        }
+
+        internal static bool CheckMagazine(string magazine, string note)
+        {
+            var magazineArray = magazine.Split(' ');
+            var noteArray = note.Split(' ');
+
+            //NEEDS WORK
+            return  (magazineArray.Intersect(noteArray).Count() == noteArray.Length);
         }
     }
 }
