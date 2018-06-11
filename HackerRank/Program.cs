@@ -64,8 +64,8 @@ namespace HackerRank
                             {
                                 Console.WriteLine("*****************************************************************");
                                 Console.WriteLine($"Check Magazine");
-                                string magazine = "give me one grand today night";
-                                string note = "give one Grand today";
+                                string magazine = "grand give me one grand today me night";
+                                string note = "one give one grand today one";
 
                                 bool canMakeNote = Challenges.CheckMagazine(magazine, note);
                                 Console.WriteLine(canMakeNote? "Yes" : "No");

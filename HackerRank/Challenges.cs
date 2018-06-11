@@ -53,11 +53,18 @@ namespace HackerRank
 
         internal static bool CheckMagazine(string magazine, string note)
         {
-            var magazineArray = magazine.Split(' ');
             var noteArray = note.Split(' ');
-
-            //NEEDS WORK
-            return  (magazineArray.Intersect(noteArray).Count() == noteArray.Length);
+            var dictionary = magazine.Split(' ').GroupBy(s => s)
+                .ToDictionary(g => g.Key, g => g.Count());
+            var canMakeMessage = true;
+            var count = 0;
+            while (canMakeMessage && count < noteArray.Length)
+            {
+                canMakeMessage = dictionary.ContainsKey(noteArray[count]) && dictionary[noteArray[count]] > 0;
+                dictionary[noteArray[count]]--;
+                count++;
+            }
+            return canMakeMessage;
         }
     }
 }
