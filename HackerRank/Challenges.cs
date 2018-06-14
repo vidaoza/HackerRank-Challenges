@@ -149,6 +149,14 @@ namespace HackerRank
                 return FibonacciSeries(n - 1) + FibonacciSeries(n - 2);
         }
 
+        internal static int LonelyInteger(int[] originalArray)
+        {
+            var lookup = originalArray.GroupBy(s => s)
+                .ToLookup(g => g.Count(), g => g.Key);
+
+            return lookup[1].Select(s => s).First();
+        }
+
         internal static List<int> MergeSort(int[] array)
         {
             List<int> unsorted = array.ToList();

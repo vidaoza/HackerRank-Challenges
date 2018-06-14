@@ -8,7 +8,7 @@ namespace HackerRank
     {
         static void Main(string[] args)
         {
-            char function = 'F';// GetUserInput();
+            char function = 'I';// GetUserInput();
 
             while (function != 'X')
             {
@@ -89,6 +89,27 @@ namespace HackerRank
                             }
                         }
                         break;
+                    case 'I':
+                        {
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine($"Lonely Integer");
+                                int[] originalArray = new[] { 0, 0, 1, 1, 2 };
+                                int lonelyInteger = Challenges.LonelyInteger(originalArray);
+                                Console.WriteLine("Original array");
+                                for (int i = 0; i < originalArray.Length; i++)
+                                    Console.Write($"{originalArray[i]} ");
+
+                                Console.WriteLine($"\nSingle Integer: {lonelyInteger}");
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                        }
+                        break;
                     case 'L':
                         {
                             try
@@ -120,7 +141,7 @@ namespace HackerRank
                                 Console.WriteLine($"Merge Sort");
                                 Challenges.NoOfInversions = 0;
                                 //int[] array = new int[] { 1,1,1,2,2 };
-                                int[] array = new int[] { 2,1,3,1,2};
+                                int[] array = new int[] { 2, 1, 3, 1, 2 };
                                 //int[] array = new int[] { 9, 2, 6, 5, 3, 10, 1, 7 };
                                 Console.WriteLine("\nUnsorted array");
                                 for (int i = 0; i < array.Length; i++)
@@ -177,6 +198,7 @@ namespace HackerRank
             Console.WriteLine("B - Bubble Sort");
             Console.WriteLine("C - Comparer Implementation");
             Console.WriteLine("F - Fibonacci series");
+            Console.WriteLine("I - Lonely Integer");
             Console.WriteLine("L - Left shift");
             Console.WriteLine("M - Merge Sort");
             Console.WriteLine("S - Search and Match strings");
