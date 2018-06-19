@@ -115,19 +115,6 @@ namespace HackerRank
             }
         }
 
-        internal static void MergeSort(int[] array, int[] temp, int left, int right, ref int inversions)
-        {
-            var midpoint = 0;
-            if (left < right)
-            {
-                midpoint = (left + right) / 2;
-                MergeSort(array, temp, left, midpoint, ref inversions);
-                MergeSort(array, temp, midpoint + 1, right, ref inversions);
-
-                inversions = +MergeArrays(array, temp, left, right);
-            }
-        }
-
         internal static int FibonacciSeries(int n)
         {
             ////Iterative solution
@@ -157,6 +144,91 @@ namespace HackerRank
             return lookup[1].Select(s => s).First();
         }
 
+        internal static int FindNumberOfPermutations(int noOfStairs)
+        {
+            int noOfPermutations = 0;
+
+            List<int> combinations = new List<int>();
+            List<int> options = new List<int>() { 3, 2, 1 };
+            List<int> availableOptions = options;
+            var availableChairs = noOfStairs;
+            var choice = 0;
+            //List<int> availableOptions = options.Where(c => c != choice).ToList();
+            List<int> combination = new List<int>();
+
+            int counter = 0;
+            while (counter < options.Count && availableChairs > 0)
+            {
+                while (availableChairs >= choice)
+                {
+                    availableChairs -= choice;
+                    combination.Add(choice);
+                }
+                choice = options[++counter];
+
+
+            }
+
+            return noOfPermutations;
+        }
+
+        internal static bool DetectLinkedListCycle(LinkedList<int> list)
+        {
+            if (list.Count() == 1)
+                return false;
+
+
+            return list.Count == 1;
+        }
+
+        internal static int FindSmallest(int[] A)
+        {
+            List<int> arrrayList = A.ToList();
+
+            var positiveNumbers = arrrayList.Where(s => s > 0).Distinct().ToList();
+            if (positiveNumbers.Count > 0)
+            {
+                var counter = 0;
+                var result = 1;
+                positiveNumbers.Sort();
+
+                while (counter < positiveNumbers.Count())
+                {
+                    if (result < positiveNumbers[counter])
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        if (result == positiveNumbers[counter])
+                            result++;
+                        else
+                            result = positiveNumbers[counter];
+                        //result = result == ?  result+ 1 : positiveNumbers[counter];
+                        counter++;
+                    }
+
+                }
+                return result;
+            }
+            else
+                return 1;
+
+        }
+
+        internal static void MergeSort(int[] array, int[] temp, int left, int right, ref int inversions)
+        {
+            var midpoint = 0;
+            if (left < right)
+            {
+                midpoint = (left + right) / 2;
+                MergeSort(array, temp, left, midpoint, ref inversions);
+                MergeSort(array, temp, midpoint + 1, right, ref inversions);
+
+                inversions = +MergeArrays(array, temp, left, right);
+            }
+        }
+
         internal static List<int> MergeSort(int[] array)
         {
             List<int> unsorted = array.ToList();
@@ -178,6 +250,106 @@ namespace HackerRank
             return Merge(left, right, ref inversions);
         }
 
+        internal static int FindNumberIndexInNumberString(int A, int B)
+        {
+            string stringA = A.ToString();
+            string stringB = B.ToString();
+
+            if (stringB.Length < stringA.Length)
+                return -1;
+
+            var stringALength = stringA.Length;
+            var counter = 0;
+
+            while (counter < stringB.Length)
+            {
+                var remainingLength = stringB.Length - counter;
+                if (remainingLength < stringALength)
+                    return -1;
+
+                var substring = stringB.Substring(counter, stringALength);
+                if (stringA.CompareTo(substring) == 0)
+                    return counter;
+
+                counter++;
+            }
+
+            return -1;
+        }
+
+        internal static int FindLongestQuasiConstant(int[] A)
+        {
+            List<int> quasiConstantLengths = new List<int>();
+
+            Array.Sort(A);
+            var longest = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                int selection = A[i];
+                int counter = i + 1;
+                List<int> sequense = new List<int>() { selection };
+                while (counter < A.Length && A[counter] - A[i] < 2)
+                {
+                    sequense.Add(A[counter]);
+                    counter++;
+                }
+
+                // Initial solution
+                //while (counter < A.Length)
+                //{
+                //    if (A[counter] == selection || A[counter] == selection + 1 || A[counter] == selection - 1)
+                //    {
+                //        sequense.Add(A[counter]);
+                //    }
+                //    counter++;
+                //}
+                quasiConstantLengths.Add(sequense.Count());
+                longest = Math.Max(longest, counter);
+            }
+            return quasiConstantLengths.Max();
+        }
+
+        internal static int FindBug(int[] A)
+        {
+            int n = A.Length;
+            int result = 0;
+            //if neighbour to the right is equal, add to adjacency count
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (A[i] == A[i + 1])
+                    result = result + 1;
+            }
+            int r = -1;
+            //compare each element to either side.
+            // if elements are equal increase count
+            // else decrease count
+            for (int i = 0; i < n; i++)
+            {
+                int count = 0;
+                if (i != 0) //changed for readability, exclude first element
+                {
+                    //if current element is not equal to previous element add to count
+                    //else subtract from it
+                    if (A[i - 1] != A[i])
+                        count = count + 1;
+                    else
+                        count = count - 1;
+                }
+                if (i < n - 1)  //exclude last element
+                {
+                    // if current is not equal to next element add to count
+                    // else subtract from it
+                    if (A[i] != A[i + 1]) //changed for readability
+                        count = count + 1;
+                    else
+                        count = count - 1;
+                }
+                //select the largest value between count and r
+                r = Math.Max(r, count);
+            }
+            return result + r;
+
+        }
         private static int MergeArrays(int[] array, int[] temp, int leftStart, int rightEnd)
         {
             int inversions = 0;
@@ -250,6 +422,89 @@ namespace HackerRank
             return merged;
         }
 
+        internal static void QueryMyQueue()
+        {
+            MyQueue<int> myQueue = new MyQueue<int>();
+
+            myQueue.Enqueue(35);
+            myQueue.Enqueue(15);
+            Console.WriteLine(myQueue.Peek());
+            myQueue.Dequeue();
+            Console.WriteLine(myQueue.Peek());
+        }
+
         internal static int NoOfInversions = 0;
+
+        internal static bool ExploreQueuesAndStacks(string brackets)
+        {
+            // { [ ( ] ) }
+
+            // if string has uneven number of chars it is definitely unbalanced
+            if (brackets.Length % 2 != 0)
+                return false;
+
+            Stack<char> bracketStack = new Stack<char>();
+            for (int i = 0; i < brackets.Length; i++)
+            {
+                switch (brackets[i])
+                {
+                    case '(':
+                        bracketStack.Push(')');
+                        break;
+                    case '{':
+                        bracketStack.Push('}');
+                        break;
+                    case '[':
+                        bracketStack.Push(']');
+                        break;
+                    default:
+                        if (bracketStack.Count == 0 || bracketStack.Pop() != brackets[i])
+                            return false;
+                        break;
+                }
+            }
+            return bracketStack.Count == 0;
+
+            /*
+            #region Stacks
+            Stack<string> lifo = new Stack<string>();
+            lifo.Push("Hello");
+            lifo.Push("World");
+            lifo.Push("!!");
+
+            Console.WriteLine("Stacks");
+            Console.WriteLine($"Peeking = {lifo.Peek()}");
+            foreach (var item in lifo)
+                Console.Write($"{item} ");
+
+            Console.WriteLine();
+            lifo.Pop();
+            foreach (var item in lifo)
+                Console.Write($"{item} ");
+
+            Console.WriteLine($"\nPeeking = {lifo.Peek()}");
+            #endregion
+
+            #region Queue
+            Queue<string> fifo = new Queue<string>();
+            fifo.Enqueue("Hello");
+            fifo.Enqueue("World");
+            fifo.Enqueue("!!");
+
+            Console.WriteLine("\nQueues");
+            Console.WriteLine($"Peeking = {fifo.Peek()}");
+            foreach (var item in fifo)
+                Console.Write($"{item} ");
+
+            Console.WriteLine();
+            fifo.Dequeue();
+            foreach (var item in fifo)
+                Console.Write($"{item} ");
+
+            Console.WriteLine($"\nPeeking = {fifo.Peek()}");
+            #endregion
+
+    */
+        }
     }
 }

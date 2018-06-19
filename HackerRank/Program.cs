@@ -8,7 +8,7 @@ namespace HackerRank
     {
         static void Main(string[] args)
         {
-            char function = 'I';// GetUserInput();
+            char function = 'R';// GetUserInput();
 
             while (function != 'X')
             {
@@ -17,6 +17,7 @@ namespace HackerRank
                 {
                     case 'A':
                         {
+                            #region Make Anagrams
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -33,30 +34,40 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
                         }
                         break;
                     case 'B':
                         {
+                            #region Bubble Sort
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
                                 Console.WriteLine($"Bubble sort");
-                                var originalArray = new int[] { 6, 4, 1 };
+                                var originalArray = new int[] { 6, 10, 7, 6, 8, 9 };
                                 Console.WriteLine("Original array");
                                 for (int i = 0; i < originalArray.Length; i++)
                                     Console.Write($"{originalArray[i]} ");
                                 Console.WriteLine();
                                 Challenges.BubbleSort(originalArray);
+
+                                //var smallestInt = Challenges.FindSmallest(originalArray);
+                                //var smallestInt = Challenges.FindNumberIndexInNumberString(29, 521);
+                                //var smallestInt = Challenges.FindLongestQuasiConstant(originalArray);
+                                //var smallestInt = Challenges.FindBug(originalArray);
+                                //Console.WriteLine(smallestInt);
                                 Console.WriteLine("\n*****************************************************************");
                             }
                             catch (Exception ex)
                             {
                                 HandleError(ex);
                             }
+                            #endregion
                         }
                         break;
                     case 'C':
                         {
+                            #region Comparer Implementation
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -68,10 +79,37 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
+                        }
+                        break;
+                    case 'D':
+                        {
+                            #region Detect Cycles in Linked List
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine($"Detect Linked List Cycles");
+                                LinkedList<int> list = new LinkedList<int>();
+                                LinkedListNode<int> first = new LinkedListNode<int>(1);
+
+                                list.AddFirst(first);
+                                list.AddAfter(first, 2);
+                                list.AddAfter(first, 3);
+
+                                bool hasCycle = Challenges.DetectLinkedListCycle(list);
+                                Console.WriteLine($"\n Has Cycle : {hasCycle}");
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                            #endregion
                         }
                         break;
                     case 'F':
                         {
+                            #region Fibonacci
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -87,10 +125,29 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
+                        }
+                        break;
+                    case 'H':
+                        {
+                            #region Hash Tables
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine($"Comparer Implementation");
+                                Challenges.ComparisonSorting();
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                            #endregion
                         }
                         break;
                     case 'I':
                         {
+                            #region Lonely Integer
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -108,10 +165,12 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
                         }
                         break;
                     case 'L':
                         {
+                            #region Left shift
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -131,10 +190,12 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
                         }
                         break;
                     case 'M':
                         {
+                            #region Merge sort
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -163,10 +224,48 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
+                        }
+                        break;
+                    case 'P':
+                        {
+                            #region Number of Permutations
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine($"Find number of Permutations");
+                                int noOfStairs = 5;
+                                int noOfPermutations = Challenges.FindNumberOfPermutations(noOfStairs);
+                                Console.WriteLine($"Number of Permutations: {noOfPermutations}");
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                            #endregion
+                        }
+                        break;
+                    case 'R':
+                        {
+                            #region Queue by stack
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine("Implement a queue by using two stacks.");
+                                Challenges.QueryMyQueue();
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                            #endregion
                         }
                         break;
                     case 'S':
                         {
+                            #region Search and Match Strings
                             try
                             {
                                 Console.WriteLine("*****************************************************************");
@@ -182,6 +281,26 @@ namespace HackerRank
                             {
                                 HandleError(ex);
                             }
+                            #endregion
+                        }
+                        break;
+                    case 'Q':
+                        {
+                            #region Queues and Stacks
+                            try
+                            {
+                                Console.WriteLine("*****************************************************************");
+                                Console.WriteLine("Queues and Stacks");
+                                string brackets = "{[()]}";
+                                bool isBalanced = Challenges.ExploreQueuesAndStacks(brackets);
+                                Console.WriteLine(isBalanced ? "YES" : "NO");
+                                Console.WriteLine("\n*****************************************************************");
+                            }
+                            catch (Exception ex)
+                            {
+                                HandleError(ex);
+                            }
+                            #endregion
                         }
                         break;
                     default:
@@ -197,10 +316,15 @@ namespace HackerRank
             Console.WriteLine("A - Anagrams");
             Console.WriteLine("B - Bubble Sort");
             Console.WriteLine("C - Comparer Implementation");
+            Console.WriteLine("D - Detect Linked List Cycle");
             Console.WriteLine("F - Fibonacci series");
+            Console.WriteLine("H - Hash Tables");
             Console.WriteLine("I - Lonely Integer");
             Console.WriteLine("L - Left shift");
             Console.WriteLine("M - Merge Sort");
+            Console.WriteLine("P - Find Permutations");
+            Console.WriteLine("Q - Balanced Brackets");
+            Console.WriteLine("R - Implement Queue using stacks");
             Console.WriteLine("S - Search and Match strings");
 
             return char.ToUpper(Console.ReadKey().KeyChar);
